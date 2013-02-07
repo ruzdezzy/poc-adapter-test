@@ -1,0 +1,62 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="org.openmrs.module.rheapocadapter.transaction.Transaction"
+		table="Queue" abstract="true">
+		<id name="id" type="java.lang.Integer">
+			<column name="ID" />
+			<generator class="identity" />
+		</id>
+		<discriminator type="string" column="queue_type" />
+		<property name="timeRequestSent" type="java.util.Date">
+			<column name="time_request_sent" />
+		</property>
+		<property name="message" type="java.lang.String">
+			<column name="message" />
+		</property>
+		<property name="url" type="java.lang.String">
+			<column name="url" />
+		</property>
+		<property name="sender" type="java.lang.Integer">
+			<column name="sender" />
+		</property>
+		<subclass
+			name="org.openmrs.module.rheapocadapter.transaction.ArchiveTransaction"
+			discriminator-value="ArchiveQueue">
+			<join table="ArchiveQueue">
+				<key column="id" />
+				<property name="timeResponseReceived" type="java.util.Date">
+					<column name="time_response_received" />
+
+				</property>
+				<property name="relatedEncounter" type="java.lang.String">
+					<column name="related_encounter" />
+				</property>
+			</join>
+		</subclass>
+		<subclass
+			name="org.openmrs.module.rheapocadapter.transaction.ErrorTransaction"
+			discriminator-value="ErrorQueue">
+			<join table="ErrorQueue">
+				<key column="id" />
+				<property name="error" type="java.lang.String">
+					<column name="error" />
+				</property>
+				<property name="responseTimeReceived" type="java.util.Date">
+					<column name="time_response_received" />
+				</property>
+			</join>
+		</subclass>
+		<subclass
+			name="org.openmrs.module.rheapocadapter.transaction.ProcessingTransaction"
+			discriminator-value="ProccessingQueue">
+			<join table="ProcessingQueue">
+				<key column="id" />
+				<property name="method" type="java.lang.String">
+					<column name="method" />
+				</property>
+			</join>
+		</subclass>
+	</class>
+</hibernate-mapping>

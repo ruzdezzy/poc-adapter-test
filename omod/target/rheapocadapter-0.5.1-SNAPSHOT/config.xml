@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE module PUBLIC "-//OpenMRS//DTD OpenMRS Config 1.2//EN" "http://resources.openmrs.org/doctype/config-1.2.dtd">
+
+<module configVersion="1.2">
+
+	<!-- Base Module Properties -->
+	<id>rheapocadapter</id>
+	<name>RHEA PoC Adapter Module</name>
+	<version>0.5.1-SNAPSHOT</version>
+	<package>org.openmrs.module.rheapocadapter</package>
+	<author>Jembi</author>
+	<description>Provides an API for OpenMRS to connect to the RHEA HIE.</description>
+
+	<activator>org.openmrs.module.rheapocadapter.AdapterModuleActivator</activator>
+
+	<!-- <updateURL>https://dev.openmrs.org/modules/download/rheapocadapter/update.rdf</updateURL> -->
+	<!-- /Base Module Properties -->
+
+	<require_version>1.2.0.3400</require_version>
+
+	<!-- Extensions -->
+	<extension>
+		<point>org.openmrs.admin.list</point>
+		<class>org.openmrs.module.rheapocadapter.extension.html.AdminList</class>
+	</extension>
+
+
+	<advice>
+		<point>org.openmrs.api.EncounterService</point>
+		<class>org.openmrs.module.rheapocadapter.advice.EncounterServiceAdvice</class>
+	</advice>
+	<advice>
+		<point>org.openmrs.api.ObsService</point>
+		<class>org.openmrs.module.rheapocadapter.advice.ObsServiceAdvice</class>
+	</advice>
+	<advice>
+		<point>org.openmrs.api.PatientService</point>
+		<class>org.openmrs.module.rheapocadapter.advice.PatientServiceAdvice</class>
+	</advice>
+	<!-- <advisor> <point>org.openmrs.api.PatientService</point> <class>org.openmrs.module.rheapocadapter.advice.PatientServiceAdvisor</class> 
+		</advisor> -->
+
+
+	<!-- Required Privileges <privilege> <name>Form Entry</name> <description>Allows 
+		user to access Form Entry pages/functions</description> </privilege> /Required 
+		Privileges -->
+
+
+	<!-- Required Global Properties -->
+	<globalProperty>
+		<property>rheapocadapter.encounterType</property>
+		<defaultValue>ANTENATAL CLINIC,ANC,ANC Referral, ANC Referral
+			Confirmation
+		</defaultValue>
+		<description>
+			Comma separated list of encounter types to send to SHR
+		</description>
+	</globalProperty>
+	<globalProperty>
+		<property>rheapocadapter.hostname</property>
+		<defaultValue>https://hie.jembi.org:5000</defaultValue>
+		<description>
+			the server url to connect to shared health record.
+		</description>
+	</globalProperty>
+	<globalProperty>
+		<property>rheapocadapter.connection_Time_out</property>
+		<defaultValue>30</defaultValue>
+		<description>
+			Connection time out in seconds
+		</description>
+	</globalProperty>
+	<globalProperty>
+		<property>rheapocadapter.username</property>
+		<defaultValue>test</defaultValue>
+		<description>
+			the server username to connect to shared health record.
+		</description>
+	</globalProperty>
+	<globalProperty>
+		<property>rheapocadapter.password</property>
+		<defaultValue>test</defaultValue>
+		<description>
+			the server password to connect to shared health record.
+		</description>
+	</globalProperty>
+	<globalProperty>
+		<property>rheapocadapter.getpatients</property>
+		<defaultValue>/ws/rest/v1/patients</defaultValue>
+		<description>
+			The URL needed to connect to RHEA in order to
+			send/receive data to/from shared record.
+		</description>
+	</globalProperty>
+	<globalProperty>
+		<property>rheapocadapter.getpatient</property>
+		<defaultValue>/ws/rest/v1/patient</defaultValue>
+		<description>
+			The URL needed to connect to RHEA in order to
+			send/receive data to/from shared record.
+		</description>
+	</globalProperty>
+	<globalProperty>
+		<property>concept.nextScheduledVisit</property>
+		<defaultValue>5096</defaultValue>
+		<description>The return visit date for a patient concept id
+		</description>
+	</globalProperty>
+	<globalProperty>
+		<property>rheapocadapter.sendingFacility</property>
+		<defaultValue>357</defaultValue>
+		<description>
+			The Sending Facility id is the FOSAID for the facility.
+			Each of the facilities in the district would have a different FOSAID.
+		</description>
+	</globalProperty>
+
+	<!-- /Required Global Properties -->
+
+	<!-- <dwr> <allow> <create creator="new" javascript="DWRFormEntryService"> 
+		<param name="class" value="org.openmrs.module.rheapocadapter.web.DWRFormEntryService"/> 
+		<include method="enterForm"/> </create> </allow> <signatures> <![CDATA[ import 
+		org.openmrs.module.rheapocadapter.web.DWRFormEntryService; DWRFormEntryService.enterForm(Integer 
+		patientId, Integer formId, boolean useEncounter, List<String> fields); ]]> 
+		</signatures> </dwr> -->
+
+	<!-- Servlets -->
+	<!-- Accessed through the url /pageContext()/moduleServlet/<moduleId>/<servlet-name> 
+		<servlet> <servlet-name>formDownload</servlet-name> <servlet-class>org.openmrs.module.rheapocadapter.web.FormDownloadServlet</servlet-class> 
+		</servlet> -->
+	<!-- /Servlets -->
+
+
+	<!-- Internationalization -->
+	<!-- All message codes should start with rheapocadapter.* -->
+	<messages>
+		<lang>en</lang>
+		<file>messages.properties</file>
+	</messages>
+	<messages>
+		<lang>fr</lang>
+		<file>messages_fr.properties</file>
+	</messages>
+	<messages>
+		<lang>es</lang>
+		<file>messages_es.properties</file>
+	</messages>
+	<!-- /Internationalization -->
+	<mappingFiles>
+		Transaction.hbm.xml
+	</mappingFiles>
+</module>
+

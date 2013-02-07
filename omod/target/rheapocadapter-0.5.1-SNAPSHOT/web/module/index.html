@@ -1,0 +1,81 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+div.tableRow {
+	height: 22px;
+	margin: 0 0 10px 0;
+}
+
+div.tableColumn {
+	float: left;
+}
+
+div.tableColumnSeperator {
+	float: left;
+	width: 20px;
+}
+
+label.fieldLabel {
+	display: block;
+	float: left;
+	width: 150px;
+	padding: 0;
+	margin: 5px 0 0;
+	text-align: left;
+}
+
+fieldset.horizontalStack {
+	display: inline-block;
+	float: left;
+	margin-right: 10px;
+}
+</style>
+</head>
+<body>
+	<div>
+		<fieldset class="horizontalStack" style="width: 20%">
+			<legend>Left Fieldset</legend>
+			<div class="tableRow">
+				<div class="tableColumn">
+					<label class="fieldLabel" for="Document_DocumentNumber">Document
+						Number:</label>
+				</div>
+				<div class="tableColumnSeperator">&nbsp;</div>
+				<div class="tableColumn">
+					<input id="Document_DocumentNumber" type="text"
+						name="Document.DocumentNumber">
+				</div>
+			</div>
+		</fieldset>
+
+		<fieldset class="horizontalStack" style="width: 20%">
+			<legend>Left Fieldset</legend>
+			<div class="tableRow">
+				<div class="tableColumn">
+					<label class="fieldLabel" for="Document_DocumentNumber">Document
+						Number:</label>
+				</div>
+				<div class="tableColumnSeperator">&nbsp;</div>
+				<div class="tableColumn">
+					<input id="Document_DocumentNumber" type="text"
+						name="Document.DocumentNumber">
+				</div>
+			</div>
+		</fieldset>
+		<!-- <fieldset style="width:30%"><legend>Right Fieldset</legend>
+    <div class="tableRow">
+        <div class="tableColumn">
+            <label class="fieldLabel" for="DocumentMod_ModificationNumber">Modification Number:</label>
+        </div>
+        <div class="tableColumnSeperator">&nbsp;</div>
+        <div class="tableColumn">
+            <input id="DocumentMod_ModificationNumber" type="text" name="DocumentMod.ModificationNumber">
+        </div>
+    </div>
+</fieldset> -->
+	</div>
+</body>
+</html>
